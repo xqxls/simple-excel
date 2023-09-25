@@ -1,8 +1,8 @@
 package com.xqxls.service;
 
+import com.xqxls.dto.UmsAdminExportDTO;
 import com.xqxls.dto.UmsAdminParam;
 import com.xqxls.model.UmsAdmin;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,5 +37,17 @@ public interface UmsAdminService {
      * 删除指定用户
      */
     int delete(Long id);
+
+    /**
+     * 查找全部
+     * @return
+     */
+    List<UmsAdmin> findAll();
+
+    /**
+     * 查找导出数据
+     * @return
+     */
+    List<UmsAdminExportDTO> findExportData();
 
 }

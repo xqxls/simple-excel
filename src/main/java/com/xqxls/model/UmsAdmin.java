@@ -1,21 +1,29 @@
 package com.xqxls.model;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class UmsAdmin implements Serializable {
     private Long id;
 
+    @ExcelProperty(value = "用户名")
     private String username;
 
+    @ExcelProperty(value = "密码")
     private String password;
 
+    @ExcelProperty(value = "头像")
     private String icon;
 
+    @ExcelProperty(value = "邮件")
     private String email;
 
+    @ExcelProperty(value = "昵称")
     private String nickName;
 
+    @ExcelProperty(value = "备注")
     private String note;
 
     private Date createTime;

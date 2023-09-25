@@ -2,6 +2,7 @@ package com.xqxls.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
+import com.xqxls.dto.UmsAdminExportDTO;
 import com.xqxls.dto.UmsAdminParam;
 import com.xqxls.mapper.UmsAdminMapper;
 import com.xqxls.model.UmsAdmin;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -93,6 +95,23 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     public int delete(Long id) {
         int count = adminMapper.deleteByPrimaryKey(id);
         return count;
+    }
+
+    @Override
+    public List<UmsAdmin> findAll() {
+        return adminMapper.selectByExample(new UmsAdminExample());
+    }
+
+    @Override
+    public List<UmsAdminExportDTO> findExportData() {
+        List<UmsAdminExportDTO> result = new ArrayList<>();
+        List<UmsAdmin> umsAdminList = adminMapper.selectByExample(new UmsAdminExample());
+        umsAdminList.forEach(umsAdmin -> {
+            UmsAdminExportDTO dto = new UmsAdminExportDTO();
+            BeanUtils.copyProperties(umsAdmin,dto);
+            result.add(dto);
+        });
+        return result;
     }
 
 

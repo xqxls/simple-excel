@@ -2,14 +2,19 @@ package com.xqxls.controller;
 
 import com.xqxls.common.CommonPage;
 import com.xqxls.common.CommonResult;
+import com.xqxls.dto.UmsAdminExportDTO;
 import com.xqxls.dto.UmsAdminParam;
 import com.xqxls.model.UmsAdmin;
 import com.xqxls.service.UmsAdminService;
+import com.xqxls.simpleexcel.SimpleExcelExport;
+import com.xqxls.simpleexcel.SimpleExcelUtils;
+import com.xqxls.simpleexcel.exporter.req.SimpleExcelExportReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -72,6 +77,16 @@ public class UmsAdminController {
         return CommonResult.failed();
     }
 
-
+    @RequestMapping(value = "/export", method = RequestMethod.POST)
+    @ResponseBody
+    public void register(HttpServletResponse response) {
+        SimpleExcelExportReq req = SimpleExcelExportReq
+                .builder()
+                .filename("用户表")
+                .fetchDataClass(UmsAdminExportDTO.class)
+                .fetchData(() -> adminService.findExportData())
+                .build();
+        SimpleExcelUtils.doExport(req);
+    }
 
 }

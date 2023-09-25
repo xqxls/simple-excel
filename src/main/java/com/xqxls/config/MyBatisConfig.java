@@ -10,6 +10,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan({"com.xqxls.mapper"})
+@MapperScan({"com.xqxls.mapper","com.xqxls.simpleexcel.persist.dao"})
 public class MyBatisConfig {
 }
