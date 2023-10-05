@@ -1,6 +1,5 @@
 package com.xqxls.simpleexcel.common.entity;
 
-import com.xqxls.simpleexcel.common.domain.IdWorker;
 import com.xqxls.simpleexcel.common.domain.UserDto;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -19,15 +18,6 @@ import lombok.Data;
 public class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 0L;
-
-    /**
-     * id生成器
-     */
-    private static IdWorker idWorker;
-
-    public static void setIdWorker(IdWorker idWorker) {
-        BaseEntity.idWorker = idWorker;
-    }
 
     @ApiModelProperty(value = "", required = false)
     @Id
@@ -94,8 +84,6 @@ public class BaseEntity implements Serializable {
      */
     @ApiModelProperty(hidden = true)
     public void setDefaultVal(Long tenementId, Long createId, String createName) {
-
-        this.id = idWorker.nextId();
         this.tenementId = tenementId;
         this.createTime = LocalDateTime.now();
         this.updateTime = LocalDateTime.now();

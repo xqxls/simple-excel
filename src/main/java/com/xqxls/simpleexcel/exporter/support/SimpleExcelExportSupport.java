@@ -1,19 +1,18 @@
 package com.xqxls.simpleexcel.exporter.support;
 
 import com.alibaba.excel.EasyExcel;
+import com.xqxls.dto.MinioUploadDto;
 import com.xqxls.simpleexcel.SimpleExcelContext;
 import com.xqxls.simpleexcel.common.ErrorMessage;
 import com.xqxls.simpleexcel.common.support.SimpleExcelTaskCalculateSupport;
 import com.xqxls.simpleexcel.common.support.SimpleExcelTaskHandleSupport;
 import com.xqxls.simpleexcel.exporter.handler.SimpleExcelExportChainContext;
-import com.xqxls.simpleexcel.feign.FileDTO;
 import com.xqxls.simpleexcel.feign.FileInfoControllerFeign;
 import com.xqxls.simpleexcel.persist.dao.SimpleExcelTaskMapper;
 import com.xqxls.simpleexcel.util.FileUtils;
 import lombok.SneakyThrows;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -127,7 +126,7 @@ public class SimpleExcelExportSupport extends SimpleExcelTaskHandleSupport {
                 File successFile = context.getSuccessFile();
                 String fileName = context.getSuccessFileName();
                 MultipartFile multipartFile = new MockMultipartFile(fileName, fileName, null, new FileInputStream(successFile));
-                FileDTO fileDto = fileInfoFeign.commonUpload("simple-excel-ex-success", multipartFile).getData();
+                MinioUploadDto fileDto = fileInfoFeign.upload(multipartFile);
                 curTask.setSuccessFileId(fileDto.getId());
                 curTask.setSuccessFileName(fileName);
                 //删除文件
@@ -140,7 +139,7 @@ public class SimpleExcelExportSupport extends SimpleExcelTaskHandleSupport {
                 File errorFile = context.getErrorFile();
                 String fileName = context.getErrorFileName();
                 MultipartFile multipartFile = new MockMultipartFile(fileName, fileName, null, new FileInputStream(errorFile));
-                FileDTO fileDto = fileInfoFeign.commonUpload("simple-excel-ex-error", multipartFile).getData();
+                MinioUploadDto fileDto = fileInfoFeign.upload(multipartFile);
                 curTask.setFailedFileId(fileDto.getId());
                 curTask.setFailedFileName(fileName);
                 //删除文件

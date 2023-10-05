@@ -1,14 +1,11 @@
 package com.xqxls.simpleexcel.common.base.ctx;
 
-
 import com.xqxls.simpleexcel.persist.po.SimpleExcelTask;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 
 

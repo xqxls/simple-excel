@@ -79,9 +79,23 @@ public class UmsAdminController {
 
     @RequestMapping(value = "/export", method = RequestMethod.POST)
     @ResponseBody
-    public void register(HttpServletResponse response) {
+    public void export(HttpServletResponse response) {
         SimpleExcelExportReq req = SimpleExcelExportReq
                 .builder()
+                .filename("用户表")
+                .fetchDataClass(UmsAdminExportDTO.class)
+                .fetchData(() -> adminService.findExportData())
+                .build();
+        SimpleExcelUtils.doExport(req);
+    }
+
+    @RequestMapping(value = "/asyncExport", method = RequestMethod.POST)
+    @ResponseBody
+    public void asyncExport(HttpServletResponse response) {
+        SimpleExcelExportReq req = SimpleExcelExportReq
+                .builder()
+                .accessTaskCenter(true)
+                .pageId("xqxls")
                 .filename("用户表")
                 .fetchDataClass(UmsAdminExportDTO.class)
                 .fetchData(() -> adminService.findExportData())

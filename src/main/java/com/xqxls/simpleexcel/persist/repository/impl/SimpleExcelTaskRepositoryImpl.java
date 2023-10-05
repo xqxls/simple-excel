@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -148,47 +149,47 @@ public class SimpleExcelTaskRepositoryImpl implements SimpleExcelTaskRepository 
         criteria.andEqualTo("isDel", 0);
         if (baseEntity != null) {
             // id
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getId())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getId())) {
                 criteria.andEqualTo("id", baseEntity.getId());
             }
             // 租户id
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getTenementId())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getTenementId())) {
                 criteria.andEqualTo("tenementId", baseEntity.getTenementId());
             }
             // 创建时间
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getCreateTime())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getCreateTime())) {
                 criteria.andEqualTo("createTime", baseEntity.getCreateTime());
             }
             // 更新时间
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getUpdateTime())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getUpdateTime())) {
                 criteria.andEqualTo("updateTime", baseEntity.getUpdateTime());
             }
             // 创建人员id
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getCreateId())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getCreateId())) {
                 criteria.andEqualTo("createId", baseEntity.getCreateId());
             }
             // 更新人员id
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getUpdateId())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getUpdateId())) {
                 criteria.andEqualTo("updateId", baseEntity.getUpdateId());
             }
             // 创建人员名字
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getCreateName())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getCreateName())) {
                 criteria.andLike("createName", "%" + baseEntity.getCreateName() + "%");
             }
             // 更新人员名字
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getUpdateName())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getUpdateName())) {
                 criteria.andLike("updateName", "%" + baseEntity.getUpdateName() + "%");
             }
             // 是否已删除
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getIsDel())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getIsDel())) {
                 criteria.andEqualTo("isDel", baseEntity.getIsDel());
             }
             // 是否启用
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getIsEnable())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getIsEnable())) {
                 criteria.andEqualTo("isEnable", baseEntity.getIsEnable());
             }
             // 版本
-            if (!org.springframework.util.StringUtils.isEmpty(baseEntity.getVersion())) {
+            if (!ObjectUtils.isEmpty(baseEntity.getVersion())) {
                 criteria.andEqualTo("version", baseEntity.getVersion());
             }
         }
