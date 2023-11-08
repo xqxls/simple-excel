@@ -6,7 +6,13 @@
 
     <groupId>com.xqxls</groupId>
     <artifactId>simple-excel</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>simple-excel-core</module>
+        <module>simple-excel-example</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
